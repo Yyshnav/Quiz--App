@@ -52,30 +52,62 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Quiz Dashboard"),
+        title: const Text(
+          "Quiz Statistics",
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+            color: Colors.deepPurple,
+          ),
+        ),
         backgroundColor: Colors.black,
+        elevation: 5,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Text(
-                "Quiz Statistics",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              // Header Section
+              // Text(
+              //   "Quiz Statistics",
+              //   style: TextStyle(
+              //     fontSize: 26,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.deepPurple,
+              //   ),
+              // ),
+              SizedBox(height: 20),
+
+              // Stats Container
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Text("Answered: $answered",
+                          style: TextStyle(fontSize: 18)),
+                      Text("Unanswered: $unanswered",
+                          style: TextStyle(fontSize: 18)),
+                      Text("Total Questions: ${widget.totalQuestions}",
+                          style: TextStyle(fontSize: 18)),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 20),
-              Text("Answered: $answered"),
-              Text("Unanswered: $unanswered"),
-              Text("Total Questions: ${widget.totalQuestions}"),
               SizedBox(height: 20),
 
               // PieChart Container
               Container(
                 height: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[100],
+                ),
                 child: PieChart(
                   PieChartData(
                     sections: [
@@ -84,31 +116,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         value: answeredPercentage,
                         title: '${answeredPercentage.toStringAsFixed(1)}%',
                         radius: 50,
-                        titleStyle:
-                            TextStyle(fontSize: 18, color: Colors.white),
+                        titleStyle: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       PieChartSectionData(
                         color: Colors.red,
                         value: unansweredPercentage,
                         title: '${unansweredPercentage.toStringAsFixed(1)}%',
                         radius: 50,
-                        titleStyle:
-                            TextStyle(fontSize: 18, color: Colors.white),
+                        titleStyle: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
 
-              // Logout Button inside a black container
+              // Logout Button
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.black,
-                ),
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.black),
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 9),
+                padding: EdgeInsets.symmetric(vertical: 1),
                 child: ElevatedButton(
                   onPressed: () {
                     showDialog(
@@ -131,7 +166,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.black,
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
                     padding: EdgeInsets.symmetric(vertical: 12),
                   ),
                   child: Text("Logout", style: TextStyle(fontSize: 18)),
@@ -144,9 +180,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
       // Curved Navigation Bar
       bottomNavigationBar: CurvedNavigationBar(
-        index: 1,
+        index: 2,
         height: 60.0,
-        items: <Widget>[
+        items: const <Widget>[
           Icon(Icons.home, size: 30, color: Colors.white),
           Icon(Icons.search, size: 30, color: Colors.white),
           Icon(Icons.settings, size: 30, color: Colors.white),
